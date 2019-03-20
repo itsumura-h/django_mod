@@ -24,6 +24,29 @@ pip3 install pipenv
 pkg='django djangorestframework django-filter orator Jinja2'
 
 mysqlflg='no'
+testflg='no'
+docflg='no'
+jpflg='no'
+
+while :
+do
+    echo 'Do you use Japanese? type y or n'
+    read input
+
+    case $input in
+        y)
+            jpflg='yes'
+            break
+            ;;
+        n)
+            break
+            ;;
+        *)
+            echo 'type y or n'
+            ;;
+    esac
+done
+
 while :
 do
     echo 'Do you use mysql? type y or n'
@@ -52,6 +75,7 @@ do
     case $input in
         y)
             pkg+=' pytest faker'
+            testflg='yes'
             break
             ;;
         n)
@@ -72,6 +96,7 @@ do
     case $input in
         y)
             pkg+=' sphinx doc-cov'
+            docflg='yes'
             break
             ;;
         n)
@@ -109,8 +134,15 @@ elif [ $mysqlflg = 'yes' ]; then
     sed -i -e "6i\ " project/manage.py
 fi
 
+#=============================================================================================
+# 日本語設定
+if [ $jpflg = 'yes' ]; then
+    sed -i -e "s?LANGUAGE_CODE = 'en-us'?LANGUAGE_CODE = 'ja'?g" project/project/settings.py
+    sed -i -e "s?TIME_ZONE = 'UTC'?TIME_ZONE = 'Asia/Tokyo'?g" project/project/settings.py
+fi
 
 #=============================================================================================
+# Migration
 if [[ $1 = 'dev' ]] && [ ! -d project/db.sqlite3 ]; then
     python3 project/manage.py makemigrations
     python3 project/manage.py migrate
@@ -126,7 +158,7 @@ fi
 #=============================================================================================
 
 # pytestが存在するときだけ実行
-if [ -f .venv/bin/pytest ]; then
+if [ $testflg = 'yes' ]; then
     python3 project/app/fixture/generator.py
     python3 project/manage.py loaddata project/app/fixture/sample_users.json
     python3 project/manage.py loaddata project/app/fixture/sample_posts.json
@@ -145,9 +177,10 @@ else
     :
 fi
 
-if [ ! -d docs ] && [ -f .venv/bin/sphinx-quickstart ]; then
+if [ ! -d docs ] && [ $docflg = 'yes' ]; then
     mkdir docs
 
+    if [ $jpflg = 'yes' ]; then
 sphinx-quickstart docs << EOF
 y
 _
@@ -170,7 +203,30 @@ n
 y
 n
 EOF
-
+    else
+sphinx-quickstart docs << EOF
+y
+_
+project
+Author
+today
+en
+.rst
+index
+y
+y
+n
+y
+y
+n
+n
+n
+y
+n
+y
+n
+EOF
+    fi
 fi
 # Separate source and build directories (y/n) [n]:
 # Name prefix for templates and static dir [_]:
@@ -199,6 +255,13 @@ make html
 cd ../
 
 #=============================================================================================
+# .gitignoreをダウンロード
+
+if [ ! -f .gitignore ]; then
+    wget https://www.gitignore.io/api/python -O .gitignore
+fi
+
+#=============================================================================================
 
 # .git削除 & git init
 if [[ $1 = 'dev' ]]; then
@@ -210,8 +273,8 @@ else
         rm -fr .git
         git init
 
-    # README.mdを綺麗サッパリ
-    rm README.md
+        # README.mdを綺麗サッパリ
+        rm README.md
 cat << EOF > README.md
 your_project
 ===
