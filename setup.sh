@@ -139,6 +139,7 @@ fi
 if [ $jpflg = 'yes' ]; then
     sed -i -e "s?LANGUAGE_CODE = 'en-us'?LANGUAGE_CODE = 'ja'?g" project/project/settings.py
     sed -i -e "s?TIME_ZONE = 'UTC'?TIME_ZONE = 'Asia/Tokyo'?g" project/project/settings.py
+    sed -i -e "s?fake = Faker()?fake = Faker('ja')?g" project/app/fixture/generator.py
 fi
 
 #=============================================================================================

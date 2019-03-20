@@ -1,6 +1,39 @@
 Django_mod
 ===
 
+これはdjango-rest-framework, Orator, Jinja2を含んだDjangoのプロジェクトを自動生成するスクリプトです。
+
+## 使い方
+Pythonを使えるようにして、setup.pyを実行するだけでOK！
+```
+python -V
+> 3.6.8
+
+bash setup.sh
+```
+
+対話型の質問が4回聞かれます。日本語を使うかどうか、mysqlを使うかどうか、テストツールを使うかどうか、ドキュメントサポートを使うかどうか。  
+全てにyesで回答する場合は、yesのオプションをつけてコマンドを実行しましょう
+
+```
+yes | bash setup.sh
+```
+
+mysqlを使うと答えた場合は、pymysqlが、
+テストツールを使うと答えた場合は、pytestとfakerが
+ドキュメントサポートを使うと答えた場合はsphinxとdoc-covが追加でインストールされます。
+
+[pymysql](https://github.com/PyMySQL/PyMySQL)  
+[pytest](https://docs.pytest.org/en/latest/)  
+[faker](https://github.com/joke2k/faker)  
+[sphinx](http://www.sphinx-doc.org/ja/stable/index.html)  
+[doc-cov](http://cocodrips.hateblo.jp/entry/2019/02/06/234630)
+
+## !!注意!!
+なお、このバッチとREADME.mdは実行後自動的に消滅する。
+
+---
+
 Auto generating script of Django project with django-rest-framework, Orator, Jinja2
 
 ## How to use?
@@ -12,7 +45,7 @@ python -V
 bash setup.sh
 ```
 
-After that, you will be asked questions 3 times. whether use mysql or not, whether use test tool or not, whether use document support or not.
+After that, you will be asked questions 4 times. whether use Japanese or not, whether use mysql or not, whether use test tool or not, whether use document support or not.
 If you want to say YES for all, you can run command with yes option as following
 
 ```
@@ -43,50 +76,5 @@ Jinja2 is more useful template engin than default Django template system
 [sphinx](http://www.sphinx-doc.org/en/stable/index.html)  
 [doc-cov](https://pypi.org/project/doc-cov/)
 
-## Sphinx setting
-If you want to generate documents in English, please replace 140 lines from 'ja' to 'en' in setup.sh
-
-```
-138 Author
-139 today
-140 ja
-141 .rst
-142 index
-```
-
-
 ## !!Caution!!
 This shell and README.md will self-destruct after run setup.
-
----
-
-これはdjango-rest-framework, Orator, Jinja2を含んだDjangoのプロジェクトを自動生成するスクリプトです。
-
-## 使い方
-Pythonを使えるようにして、setup.pyを実行するだけでOK！
-```
-python -V
-> 3.6.8
-
-bash setup.sh
-```
-
-対話型の質問が3回聞かれます。mysqlを使うかどうか、テストツールを使うかどうか、ドキュメントサポートを使うかどうか。  
-全てにyesで回答する場合は、yesのオプションをつけてコマンドを実行しましょう
-
-```
-yes | bash setup.sh
-```
-
-mysqlを使うと答えた場合は、pymysqlが、
-テストツールを使うと答えた場合は、pytestとfakerが
-ドキュメントサポートを使うと答えた場合はsphinxとdoc-covが追加でインストールされます。
-
-[pymysql](https://github.com/PyMySQL/PyMySQL)  
-[pytest](https://docs.pytest.org/en/latest/)  
-[faker](https://github.com/joke2k/faker)  
-[sphinx](http://www.sphinx-doc.org/ja/stable/index.html)  
-[doc-cov](http://cocodrips.hateblo.jp/entry/2019/02/06/234630)
-
-## !!注意!!
-なお、このバッチとREADME.mdは実行後自動的に消滅する。
