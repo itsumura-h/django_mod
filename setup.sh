@@ -259,11 +259,23 @@ fi
 # Create Makefile? (y/n) [y]:
 # Create Windows command file? (y/n) [y]:
 
-#sphinx-apidoc -F -o docs/source/ project/ -s html
+sed -i -e "s?# import os?import os?g" docs/source/conf.py
+sed -i -e "s?# import sys?import sys?g" docs/source/conf.py
+sed -i -e "s?# sys.path.insert(0, os.path.abspath('.'))?sys.path.insert(0, os.path.abspath('../project/app'))?g" docs/source/conf.py
+
+sphinx-apidoc -F -o docs/source/ project/app
 cd docs
 make html
 cd ../
 
+#=============================================================================================
+
+# if [ ! -f project/roadie.py ]; then
+# cat << EOF > project/roadie.py
+
+
+# EOF
+# fi
 #=============================================================================================
 
 # .git削除 & git init
