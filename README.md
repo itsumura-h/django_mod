@@ -1,11 +1,15 @@
 Django_mod
 ===
 
-これはdjango-rest-framework, Orator, Jinja2を含んだDjangoのプロジェクトを自動生成するスクリプトです。
+これはdjango-rest-framework, Orator, Jinja2を含んだDjangoのプロジェクトを自動生成するスクリプトです
 
 ## 使い方
 Pythonを使えるようにして、setup.pyを実行するだけでOK！
+git cloneは、後ろに任意の名前を付けることで、プロジェクトの名前を変えてクローンできます
 ```
+git clone https://github.com/itsumura-h/django_mod.git my_project
+cd my_project
+
 python -V
 > 3.6.8
 
@@ -21,7 +25,7 @@ yes | bash setup.sh
 
 mysqlを使うと答えた場合は、pymysqlが、
 テストツールを使うと答えた場合は、pytestとfakerが
-ドキュメントサポートを使うと答えた場合はsphinxとdoc-covが追加でインストールされます。
+ドキュメントサポートを使うと答えた場合はsphinxとdoc-covが追加でインストールされます
 
 [pymysql](https://github.com/PyMySQL/PyMySQL)  
 [pytest](https://docs.pytest.org/en/latest/)  
@@ -30,14 +34,20 @@ mysqlを使うと答えた場合は、pymysqlが、
 [doc-cov](http://cocodrips.hateblo.jp/entry/2019/02/06/234630)
 
 ## !!注意!!
-なお、このバッチとREADME.mdは実行後自動的に消滅する。
+なお、このバッチとREADME.mdは実行後自動的に消滅する
 
 ---
 
 Auto generating script of Django project with django-rest-framework, Orator, Jinja2
 
 ## How to use?
-All you need is just making Python available and run following command
+When you do "git clone", if you add any project name, you can change default dir name
+```
+git clone https://github.com/itsumura-h/django_mod.git my_project
+cd my_project
+```
+
+Then, all you need to do is just making Python available and run following command
 ```
 python -V
 > 3.6.8
