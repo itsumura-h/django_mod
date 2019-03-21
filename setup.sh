@@ -1,26 +1,5 @@
 #!/bin/bash -ex
 
-if [ ! -d project ]; then
-    git clone https://gitlab.com/dumblepy/django_mod.git
-    mv django_mod/* . && rm -fr django_mod
-elif [[ $1 = 'dev' ]]; then
-    rm project/app/fixture/sample_users.json
-    rm project/app/fixture/sample_posts.json
-elif [[ $1 = 'test' ]]; then
-    rm -fr project
-    git clone https://gitlab.com/dumblepy/django_mod.git
-    mv django_mod/* . && rm -fr django_mod
-else
-    git clone https://gitlab.com/dumblepy/django_mod.git
-    mv django_mod/* . && rm -fr django_mod
-fi
-
-#=============================================================================================
-
-python3 -m venv .venv
-source .venv/bin/activate
-
-pip3 install pipenv
 pkg='django djangorestframework django-filter orator Jinja2'
 
 mysqlflg='no'
@@ -108,6 +87,36 @@ do
             ;;
     esac
 done
+
+#=============================================================================================
+
+if [ ! -d project ]; then
+    git clone https://gitlab.com/dumblepy/django_mod.git
+    mv django_mod/* . && rm -fr django_mod
+elif [[ $1 = 'dev' ]]; then
+    rm project/app/fixture/sample_users.json
+    rm project/app/fixture/sample_posts.json
+elif [[ $1 = 'test' ]]; then
+    rm -fr project
+    git clone https://gitlab.com/dumblepy/django_mod.git
+    mv django_mod/* . && rm -fr django_mod
+else
+    git clone https://gitlab.com/dumblepy/django_mod.git
+    mv django_mod/* . && rm -fr django_mod
+fi
+
+#=============================================================================================
+# .gitignoreをダウンロード
+
+if [ ! -f .gitignore ]; then
+    wget https://www.gitignore.io/api/python -O .gitignore
+fi
+
+#=============================================================================================
+
+pip3 install pipenv
+python3 -m venv .venv
+source .venv/bin/activate
 
 #pipenv install pylint autopep8 django djangorestframework pymysql orator Jinja2 pytest faker eralchemy doc-cov
 if [[ $1 = 'dev' ]]; then
@@ -254,13 +263,6 @@ fi
 cd docs
 make html
 cd ../
-
-#=============================================================================================
-# .gitignoreをダウンロード
-
-if [ ! -f .gitignore ]; then
-    wget https://www.gitignore.io/api/python -O .gitignore
-fi
 
 #=============================================================================================
 
