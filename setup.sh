@@ -114,8 +114,8 @@ fi
 
 #=============================================================================================
 
-pip3 install pipenv
 python3 -m venv .venv
+pip3 install pipenv
 source .venv/bin/activate
 
 #pipenv install pylint autopep8 django djangorestframework pymysql orator Jinja2 pytest faker eralchemy doc-cov
