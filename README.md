@@ -85,8 +85,8 @@ If you use document support, sphinx and doc-cov are going to be installed.
 To run commnad, file is created already.
 
 ```
-python roadie.py model user_post
-    => project/app/views/user_post_view.py will be created.
+python roadie.py model User user
+    => project/app/orator/User.py will be created.
 ```
 ```
 python roadie.py view user_post
