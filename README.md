@@ -31,8 +31,8 @@ mysqlを使うと答えた場合は、pymysqlが、
 コマンドから実行することで、ビュー(DRF)、モデル(Orator)、テンプレートが自動生成できます。
 
 ```
-python roadie.py model user_post
-    => project/app/views/user_post_view.py が作られる
+python roadie.py model User user
+    => project/app/orator/User.py が作られる
 ```
 ```
 python roadie.py view user_post
