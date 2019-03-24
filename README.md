@@ -27,6 +27,22 @@ mysqlを使うと答えた場合は、pymysqlが、
 テストツールを使うと答えた場合は、pytestとfakerが
 ドキュメントサポートを使うと答えた場合はsphinxとdoc-covが追加でインストールされます
 
+### roadie.py
+コマンドから実行することで、ビュー(DRF)、モデル(Orator)、テンプレートが自動生成できます。
+
+```
+python roadie.py model user_post
+    => project/app/views/user_post_view.py が作られる
+```
+```
+python roadie.py view user_post
+    => project/app/views/user_post_view.py が作られる
+```
+```
+python roadie.py template user_post
+    => project/app/templates/app/user_post.html が作られる
+```
+
 [pymysql](https://github.com/PyMySQL/PyMySQL)  
 [pytest](https://docs.pytest.org/en/latest/)  
 [faker](https://github.com/joke2k/faker)  
@@ -64,6 +80,22 @@ yes | bash setup.sh
 If you use mysql, pymysql is going to be installed.  
 If you use test tool, pytest and faker are going to be installed.  
 If you use document support, sphinx and doc-cov are going to be installed.
+
+### roadie.py
+To run commnad, file is created already.
+
+```
+python roadie.py model user_post
+    => project/app/views/user_post_view.py will be created.
+```
+```
+python roadie.py view user_post
+    => project/app/views/user_post_view.py will be created.
+```
+```
+python roadie.py template user_post
+    => project/app/templates/app/user_post.html will be created.
+```
 
 ## Django-Rest-Framework
 https://www.django-rest-framework.org
